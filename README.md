@@ -8,7 +8,7 @@ If you are tired of Facebook video "screamers", want to make sure next video you
 
 ### What's good in it 
 * Have access to Facebook pages only.
-* It is open source, feel free to check it here:
+* It is open source, feel free to check it here: https://github.com/zagushka/facebook-video-volume-fix
 * No external libraries used. 
 * Minimalistic, only few lines of code.
 
