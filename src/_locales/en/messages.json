@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Facebook Video Volume Fixer",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "Extension allows Facebook to 'remember' video volume level.",
+    "description": "The description of the application, displayed in the web store."
+  }
+}
