@@ -1,6 +1,9 @@
 ## ![Facebook Video Volume Fixer](src/icons/icon.48.png) Facebook Video Volume Fixer
 
+Install from [Chrome Web Store](https://chrome.google.com/webstore/detail/facebook-video-volume-fix/elfninnghghhkopaakchobkbholknbjf).
+
 If you are tired of Facebook video "screamers", want to make sure next video you watch persist previous video volume level - this extension for you.
+
 
 ### What it does
 1. Preserve volume level between videos and sessions.
