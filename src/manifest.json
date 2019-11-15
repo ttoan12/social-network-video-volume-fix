@@ -17,7 +17,7 @@
   "content_scripts": [
     {
       "js": [
-        "facebook.js"
+        "index.js"
       ],
       "matches": [
         "https://www.facebook.com/*"

@@ -1,4 +1,4 @@
-## ![Facebook Video Volume Fixer](src/icons/icon.48.png) Facebook Video Volume Fixer
+## ![Social Network Video Volume Fixer](src/icons/icon.48.png) Social Network Video Volume Fixer
 
 Install from [Chrome Web Store](https://chrome.google.com/webstore/detail/facebook-video-volume-fix/elfninnghghhkopaakchobkbholknbjf).
 
