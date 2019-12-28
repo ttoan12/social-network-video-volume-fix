@@ -1,0 +1,19 @@
+{
+  "name": "socail-network-video-volume-fix",
+  "sideEffects": false,
+  "version": "2.0.0",
+  "description": "Install from [Chrome Web Store](https://chrome.google.com/webstore/).",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.0.5",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "zip-webpack-plugin": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
