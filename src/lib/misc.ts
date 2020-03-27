@@ -14,7 +14,7 @@ export function keyupCallback(event: KeyboardEvent) {
 }
 
 export function pageKeyupCallback(event: KeyboardEvent) {
-  if (!(event.ctrlKey && event.shiftKey && ['ArrowDown', 'ArrowDown', 'Backspace'].find(k => k === event.key))) {
+  if (!(event.ctrlKey && event.shiftKey && ['ArrowDown', 'ArrowUp', 'Backspace'].find(k => k === event.key))) {
     return;
   }
 
