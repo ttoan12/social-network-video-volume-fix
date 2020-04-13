@@ -18,7 +18,7 @@ export function pageKeyupCallback(event: KeyboardEvent) {
     return;
   }
 
-  chrome.storage.sync.get(['volume', 'muted'], (r) => {
+  chrome.storage.local.get(['volume', 'muted'], (r) => {
     let update = {};
     switch (event.key) {
       case 'Backspace': // Toggle muted
@@ -35,7 +35,7 @@ export function pageKeyupCallback(event: KeyboardEvent) {
         }
     }
     if (Object.keys(update).length) {
-      chrome.storage.sync.set({...r, ...update}, () => log('Volume UPDATED to', update));
+      chrome.storage.local.set({...r, ...update}, () => log('Volume UPDATED to', update));
     }
   });
 }

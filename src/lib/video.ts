@@ -48,7 +48,7 @@ export function playCallback(event: Event) {
   chrome.storage.onChanged.addListener(getStorageListenerCallback(video));
   event.target.addEventListener('volumechange', volumeChangeCallback);
 
-  chrome.storage.sync.get(['volume', 'muted'], (r) => {
+  chrome.storage.local.get(['volume', 'muted'], (r) => {
     if ('undefined' !== typeof r.volume && r.volume !== video.volume) {
       video.volume = r.volume;
       video.muted = r.muted;
@@ -61,11 +61,11 @@ function volumeChangeCallback(event: Event) {
   const video: HTMLVideoElement = <HTMLVideoElement>event.target;
 
   // Update only when changed
-  chrome.storage.sync.get(['volume', 'muted'], (r) => {
+  chrome.storage.local.get(['volume', 'muted'], (r) => {
     if (r.volume === video.volume && r.muted === video.muted) {
       return;
     }
-    chrome.storage.sync.set({...r, volume: video.volume, muted: video.muted}, () => {
+    chrome.storage.local.set({...r, volume: video.volume, muted: video.muted}, () => {
       log('Volume CHANGED to', video.volume, video.muted);
     });
   });

@@ -7,8 +7,8 @@ const ZipPlugin = require('zip-webpack-plugin');
 module.exports = {
   entry: {
     'content': './src/content.ts',
-    // 'popup': './src/popup.ts',
-    // 'background': './src/background.ts'
+    'popup': './src/popup.ts',
+    'background': './src/background.ts'
   },
   module: {
     rules: [
