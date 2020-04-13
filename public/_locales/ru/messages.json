@@ -1,8 +1,10 @@
 {
   "appName": {
-    "message": "Social Network Video Volume Fixer"
+    "message": "Фиксы для уровня звука в видео Фейсбука",
+    "description": "The title of the application, displayed in the web store."
   },
   "appDesc": {
-    "message": "Дополненеие позволяющее Facebook 'запоминать' уровень звука в видео. "
+    "message": "Позволяет 'запоминать' уровень звука в видео Facebook.",
+    "description": "The description of the application, displayed in the web store."
   }
 }

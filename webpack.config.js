@@ -1,4 +1,5 @@
 const path = require('path');
+const process = require('process');
 const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
@@ -27,7 +28,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'DEBUG': JSON.stringify(true),
+      'DEBUG': JSON.stringify(process.env.DEBUG),
     }),
     new CopyPlugin([
       {from: './public', to: './'},
