@@ -7,7 +7,7 @@
       font-size: 15px;
       background: #f5f5f5;
       min-width: 200px;
-      padding: 15px 5px;
+      padding: 0;
     }
 
     .link {
@@ -34,25 +34,71 @@
       top: 1px;
     }
 
-    /*input[type="range"] {*/
-    /*  -webkit-appearance: slider-vertical;*/
-    /*}*/
+    input[type="range"] {
+      width: 50px;
+      -webkit-appearance: slider-vertical;
+    }
+
+    kbd {
+      background-color: #eee;
+      border-radius: 3px;
+      border: 1px solid #b4b4b4;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+      color: #333;
+      display: inline-block;
+      font-size: .85em;
+      font-weight: 700;
+      line-height: 1;
+      padding: 2px 4px;
+      white-space: nowrap;
+    }
+
+    div {
+      display: flex;
+    }
+
   </style>
 </head>
 <body>
-<!--<p id='description'>:)</p>-->
-<!--<a id='link' class="link"><span id="title"></span></a>-->
-<datalist id="volumes">
-  <option>0</option>
-  <option>0.02</option>
-  <option>0.04</option>
-  <option>0.08</option>
-  <option>0.16</option>
-  <option>0.32</option>
-  <option>0.64</option>
-  <option>1</option>
-</datalist>
-<input type="range" min="0" max="1" step="0.01" list="volumes" id="vol">
+
+<div style="display: flex; align-items: stretch">
+
+  <div style=" flex-flow: column; justify-content: space-between">
+    <div style="flex-flow: column">
+      <div>Volume Up/Down</div>
+      <div>
+        <div><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Up/Down</kbd></div>
+      </div>
+    </div>
+
+    <div style="flex-flow: column">
+      <div> Mute</div>
+      <div>
+        <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Backspace</kbd>
+      </div>
+    </div>
+
+    <div>
+      <a id='link' class="link"><span id="title">Rate it or leave feedback</span></a>
+    </div>
+  </div>
+
+  <div style="flex-shrink: 1">
+    <datalist id="volumes">
+      <option>0</option>
+      <option>0.02</option>
+      <option>0.04</option>
+      <option>0.08</option>
+      <option>0.16</option>
+      <option>0.32</option>
+      <option>0.64</option>
+      <option>1</option>
+    </datalist>
+    <input type="range" min="0" max="1" step="0.01" list="volumes" id="vol">
+  </div>
+
+</div>
+
 <script src="./popup.js"></script>
 </body>
 </html>
