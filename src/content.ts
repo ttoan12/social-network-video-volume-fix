@@ -3,7 +3,6 @@ import {
   appendVideoFunctionality,
   extractVideosFromNode,
   observeContainer,
-  pageKeyupCallback,
 } from './lib/misc';
 
 const getContainer = () => document.body;
@@ -17,5 +16,8 @@ observeContainer(container, config);
 // Take care of Videos already in DOM
 extractVideosFromNode(container).forEach(appendVideoFunctionality);
 
-// Add shortcuts to change volume level and mute
-document.body.addEventListener('keyup', pageKeyupCallback);
+/**
+ * Add shortcuts to change volume level and mute
+ * @deprecated Using chrome.commands instead
+ */
+// document.body.addEventListener('keyup', pageKeyupCallback);

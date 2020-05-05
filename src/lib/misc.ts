@@ -6,36 +6,42 @@ export function log(...args: any[]) {
   && console.log.apply(null, args);
 }
 
+/**
+ * Fix native facebook scroll when changing vol.
+ * @param event
+ */
 export function keyupCallback(event: KeyboardEvent) {
-  if (['ArrowDown', 'ArrowUp'].find((k) => k === event.key)) {
-    // Fix native facebook scroll when changing vol.
+  if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
     event.preventDefault();
   }
 }
 
-export function pageKeyupCallback(event: KeyboardEvent) {
-  if (!(event.ctrlKey && event.shiftKey && ['ArrowDown', 'ArrowUp', 'Backspace'].find(k => k === event.key))) {
-    return;
-  }
+export type soundEventName = 'toggle-volume' | 'volume-up' | 'volume-down' | 'volume-set';
+export type StoredSoundSettings = { volume?: number; muted?: boolean };
 
-  chrome.storage.local.get(['volume', 'muted'], (r) => {
-    let update = {};
-    switch (event.key) {
-      case 'Backspace': // Toggle muted
+export function handleSoundEvent(event: soundEventName, newVolume: number = 0): void {
+  getVolumeSettings((r: StoredSoundSettings) => {
+    let update = r;
+    switch (event) {
+      case 'volume-set':
+        update = {...update, volume: newVolume, muted: false};
+        break;
+      case 'toggle-volume': // Toggle muted
         update = {...update, muted: !r.muted};
         break;
-      case 'ArrowDown':
-      case 'ArrowUp':
+      case 'volume-down':
+      case 'volume-up':
         // Calculate new volume level
-        let volume = r.volume + 0.1 * ('ArrowDown' === event.key ? -1 : 1);
+        let volume = isNaN(r.volume) ? 1 : r.volume;
+        volume = volume + 0.1 * ('volume-down' === event ? -1 : 1);
         volume = (volume > 1) ? 1 : volume;
         volume = (volume < 0) ? 0 : volume;
-        if (volume !== r.volume || r.muted) { // Update only if changed or was muted
-          update = {...update, volume: volume, muted: false};
-        }
+        update = {...update, volume: volume, muted: false};
     }
-    if (Object.keys(update).length) {
-      chrome.storage.local.set({...r, ...update}, () => log('Volume UPDATED to', update));
+
+    // Update when changed
+    if (update.volume !== r.volume || update.muted !== r.muted) {
+      setVolumeSettings({...r, ...update}, () => log('Volume UPDATED to', update));
     }
   });
 }
@@ -62,6 +68,7 @@ export function appendVideoFunctionality(video: HTMLVideoElement) {
   const parentContainer = video.closest('.mtm');
   if (parentContainer) {
     log('found video parent container', parentContainer, video);
+    // Fix native facebook scroll when changing vol.
     parentContainer.addEventListener('keyup', keyupCallback);
   }
 }
@@ -83,4 +90,16 @@ export function observeContainer(cnt: HTMLElement, cfg: MutationObserverInit) {
       });
     }
   }).observe(cnt, cfg);
+}
+
+export function getVolumeSettings(callback: (s: StoredSoundSettings) => void) {
+  chrome.storage.local.get(['volume', 'muted'], (s: StoredSoundSettings) => callback.call(null, {
+    volume: 1,
+    muted: false,
+    ...s,
+  }));
+}
+
+export function setVolumeSettings(settings: StoredSoundSettings, callback?: () => void) {
+  chrome.storage.local.set(settings, callback);
 }
