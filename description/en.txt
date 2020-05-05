@@ -1,14 +1,13 @@
 If you are tired of Facebook video "screamers", want to make sure next video you watch persist previous video volume level - this extension for you.
 
-What it does
 * Preserve volume level between videos and sessions.
 * Force ads to play with the same volume level as the videos.
 * Remove Mute from videos at "Messages" area.
 * Fixes Facebook native volume up/down with simultaneous scroll functionality.
-* Keyboard shortcuts:
-  * Ctrl + Shift + Up = Volume Up
-  * Ctrl + Shift + Down = Volume Down
-  * Ctrl + Shift + Backspace = Toggle Mute
+* Change volume level with configurable keyboard shortcuts.
+  * Alt + Shift + Up = Volume Up
+  * Alt + Shift + Down = Volume Down
+  * Alt + Shift + M = Toggle Mute
 
 It is open source
 Feel free to check it here: https://github.com/zagushka/social-network-video-volume-fix

@@ -5,10 +5,10 @@
 * Уровень звука во включениях рекламы как в видео.
 * Убрано "без звука" в "Сообщениях".
 * При изменении звука при помощи клавиш вверх и вниз страница Фейсбук не будет скролится.
-* Можно менять уровень звука при помощи следующих комбинаций клавиш:
-  * Ctrl + Shift + Up = Volume Up
-  * Ctrl + Shift + Down = Volume Down
-  * Ctrl + Shift + Backspace = Toggle Mute
+* Регулировка звука комбинаций клавиш с возвомжнстью перенастройки
+  * Alt + Shift + Up = Громче
+  * Alt + Shift + Down = Тише
+  * Alt + Shift + M = Звук вкл/выкл
 
 It is open source
 Feel free to check it here: https://github.com/zagushka/social-network-video-volume-fix
