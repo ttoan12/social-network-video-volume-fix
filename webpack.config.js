@@ -1,10 +1,9 @@
 const path = require('path');
-const process = require('process');
 const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
 
-module.exports = {
+module.exports = env => ({
   entry: {
     'content': './src/content.ts',
     'popup': './src/popup.ts',
@@ -28,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'DEBUG': JSON.stringify(process.env.DEBUG),
+      'DEBUG': JSON.stringify(env.DEBUG),
     }),
     new CopyPlugin([
       {from: './public', to: './'},
@@ -39,4 +38,4 @@ module.exports = {
     })
   ],
   mode: 'production'
-};
+});
