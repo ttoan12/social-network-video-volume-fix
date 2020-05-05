@@ -6,5 +6,25 @@
   "appDesc": {
     "message": "Позволяет 'запоминать' уровень звука в видео Facebook.",
     "description": "The description of the application, displayed in the web store."
+  },
+  "volumeUp": {
+    "message": "Громче",
+    "description": "Keyboard shortcut `volume up` name"
+  },
+  "volumeDown": {
+    "message": "Тише",
+    "description": "Keyboard shortcut `volume down` name"
+  },
+  "toggleSound": {
+    "message": "Звук вкл/выкл",
+    "description": "Keyboard shortcut `toggle sound` name"
+  },
+  "customize": {
+    "message": "Настроки",
+    "description": "Customize button name"
+  },
+  "rate_or_leave_a_feedback": {
+    "message": "Оцените или прокомментируйте",
+    "description": "'rate or leave a feedback' button name"
   }
 }

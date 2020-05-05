@@ -6,5 +6,33 @@
   "appDesc": {
     "message": "Extension allows Facebook to 'remember' video volume level.",
     "description": "The description of the application, displayed in the web store."
+  },
+  "volumeUp": {
+    "message": "Volume Up",
+    "description": "Keyboard shortcut `volume up` name"
+  },
+  "volumeDown": {
+    "message": "Volume Down",
+    "description": "Keyboard shortcut `volume down` name"
+  },
+  "toggleSound": {
+    "message": "Toggle Sound",
+    "description": "Keyboard shortcut `toggle sound` name"
+  },
+  "customize": {
+    "message": "Customize",
+    "description": "Customize button name"
+  },
+  "rate_or_leave_a_feedback": {
+    "message": "Rate or leave a feedback",
+    "description": "'rate or leave a feedback' button name"
+  },
+  "link_shortcuts": {
+    "message": "chrome://extensions/shortcuts",
+    "description": "Shortcuts customisation link"
+  },
+  "link_rate_us": {
+    "message": "https://chrome.google.com/webstore/detail/bffojpajjfmkcjpdenhfdlpjdbpflpbl",
+    "description": "Link to google chrome extension page"
   }
 }
