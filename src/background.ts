@@ -1,14 +1,9 @@
-import { updateVolumeBadgeText } from './lib/badge';
+import { refreshVolumeBadge } from './lib/badge';
 import {
-  getVolumeSettings,
   handleSoundEvent,
   soundEventName,
-  StoredSoundSettings,
 } from './lib/misc';
 
-function refreshVolumeBadge() {
-  getVolumeSettings((s: StoredSoundSettings) => updateVolumeBadgeText(s.muted, s.volume));
-}
 
 chrome.commands.onCommand.addListener((command) => {
   if (['volume-up', 'volume-down', 'toggle-volume'].includes(command)) {

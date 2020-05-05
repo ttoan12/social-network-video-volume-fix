@@ -1,3 +1,8 @@
+import {
+  getVolumeSettings,
+  StoredSoundSettings,
+} from './misc';
+
 export function formatVolumeForBadge(value: number) {
   return Math.round(value * 100) + '%';
 }
@@ -13,4 +18,8 @@ export function updateVolumeBadgeText(muted: boolean, volume: number) {
   }
 
   setBadgeText(formatVolumeForBadge(volume));
+}
+
+export function refreshVolumeBadge() {
+  getVolumeSettings((s: StoredSoundSettings) => updateVolumeBadgeText(s.muted, s.volume));
 }
