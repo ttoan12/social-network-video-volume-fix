@@ -6,7 +6,7 @@
       font-family: Arial, serif;
       font-size: 15px;
       background: #f5f5f5;
-      min-width: 200px;
+      /*min-width: 200px;*/
       padding: 0;
     }
 
@@ -57,33 +57,44 @@
       display: flex;
     }
 
+    .help-button {
+      text-align: center;
+      display: block;
+      width: 16px;
+      height: 17px;
+      border-radius: 50%;
+      border: 1px solid black;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
+<template id="shortcut-template">
+  <div class="shortcut-description"></div>
+  <div>
+    <div class="shortcut-keys"></div>
+  </div>
+</template>
+
 <div style="display: flex; align-items: stretch">
 
-  <div style=" flex-flow: column; justify-content: space-between">
-    <div style="flex-flow: column">
-      <div>Volume Up/Down</div>
-      <div>
-        <div><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Up/Down</kbd></div>
-      </div>
-    </div>
-
-    <div style="flex-flow: column">
-      <div> Mute</div>
-      <div>
-        <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Backspace</kbd>
-      </div>
-    </div>
-
+  <div id="help-area" class="hidden" style="flex-flow: column; justify-content: space-between">
+    <div id="shortcuts-list" style="flex-flow: column"></div>
     <div>
-      <a id='link' class="link"><span id="title">Rate it or leave feedback</span></a>
+      <a class="link" link="link_shortcuts"><span translate>customize</span></a>
+    </div>
+    <div style="flex-grow: 1">&nbsp;</div>
+    <div>
+      <a class="link" link="link_rate_us"><span translate>rate_or_leave_a_feedback</span></a>
     </div>
   </div>
 
-  <div style="flex-shrink: 1">
+  <div style="flex-shrink: 1; flex-direction: column">
     <datalist id="volumes">
       <option>0</option>
       <option>0.02</option>
@@ -95,6 +106,7 @@
       <option>1</option>
     </datalist>
     <input type="range" min="0" max="1" step="0.01" list="volumes" id="vol">
+    <span style="align-self: flex-end;"><a id="help-button" class="help-button">?</a></span>
   </div>
 
 </div>

@@ -12,7 +12,5 @@ export function updateVolumeBadgeText(muted: boolean, volume: number) {
     return;
   }
 
-  if (!isNaN(volume)) {
-    setBadgeText(formatVolumeForBadge(volume));
-  }
+  setBadgeText(formatVolumeForBadge(volume));
 }
