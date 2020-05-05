@@ -53,7 +53,7 @@ document.querySelectorAll('[link]')
   .forEach((element) => {
     element.addEventListener('click', (e) => {
       chrome.tabs.create({
-        url: chrome.i18n.getMessage((<HTMLInputElement>e.target).getAttribute('link')),
+        url: chrome.i18n.getMessage(element.getAttribute('link')),
       });
     });
   });
