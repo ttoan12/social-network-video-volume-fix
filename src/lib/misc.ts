@@ -1,4 +1,5 @@
 import { playCallback } from './video';
+import Port = chrome.runtime.Port;
 
 export function log(...args: any[]) {
   // @ts-ignore
@@ -61,8 +62,10 @@ export function extractVideosFromNode(node: Node): Array<HTMLVideoElement> {
   return videoElements;
 }
 
-export function appendVideoFunctionality(video: HTMLVideoElement) {
+export function addVideoEvents(video: HTMLVideoElement, port: Port) {
+  log('add events to video', video);
   video.addEventListener('play', playCallback);
+  port.onDisconnect.addListener(() => video.removeEventListener('play', playCallback));
 
   // Parent container
   const parentContainer = video.closest('.mtm');
@@ -70,12 +73,13 @@ export function appendVideoFunctionality(video: HTMLVideoElement) {
     log('found video parent container', parentContainer, video);
     // Fix native facebook scroll when changing vol.
     parentContainer.addEventListener('keyup', keyupCallback);
+    port.onDisconnect.addListener(() => parentContainer.removeEventListener('keyup', keyupCallback));
   }
 }
 
-export function observeContainer(cnt: HTMLElement, cfg: MutationObserverInit) {
+export function observeContainer(cnt: HTMLElement, cfg: MutationObserverInit, port: Port) {
   log('STARTING NEW CONTAINER OBSERVER');
-  return new MutationObserver((mutationsList, obs) => {
+  const observer = new MutationObserver((mutationsList, obs) => {
     if (!document.contains(cnt)) {
       log('LOST CONTAINER');
       // Node was changed, find new one
@@ -86,10 +90,16 @@ export function observeContainer(cnt: HTMLElement, cfg: MutationObserverInit) {
     // Callback function to execute when mutations are observed
     for (let mutation of mutationsList) {
       mutation.addedNodes.forEach((node) => {
-        extractVideosFromNode(node).forEach(appendVideoFunctionality);
+        extractVideosFromNode(node).forEach((video) => addVideoEvents(video, port));
       });
     }
-  }).observe(cnt, cfg);
+  });
+  observer.observe(cnt, cfg);
+
+  return () => {
+    log('disconnecting container observer');
+    observer.disconnect();
+  }
 }
 
 export function getVolumeSettings(callback: (s: StoredSoundSettings) => void) {

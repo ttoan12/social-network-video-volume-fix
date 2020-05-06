@@ -1,9 +1,13 @@
 // Icons from: http://free-icon-rainbow.com/volume-interface-symbol-free-icon-1/
 import {
-  appendVideoFunctionality,
+  addVideoEvents,
   extractVideosFromNode,
   observeContainer,
 } from './lib/misc';
+
+// Use on disconnect event to detect extension update
+// Keep `chrome.runtime.onConnect.addListener(port => {});` listener alive at background to prevent early disconnect
+const port = chrome.runtime.connect();
 
 const getContainer = () => document.body;
 
@@ -11,13 +15,12 @@ const getContainer = () => document.body;
 const config: MutationObserverInit = {attributes: false, childList: true, subtree: true};
 const container = getContainer();
 
-observeContainer(container, config);
+const observerUnsubscribe = observeContainer(container, config, port);
+
+port.onDisconnect.addListener(() => {
+  // Clean up
+  observerUnsubscribe();
+});
 
 // Take care of Videos already in DOM
-extractVideosFromNode(container).forEach(appendVideoFunctionality);
-
-/**
- * Add shortcuts to change volume level and mute
- * @deprecated Using chrome.commands instead
- */
-// document.body.addEventListener('keyup', pageKeyupCallback);
+extractVideosFromNode(container).forEach((video) => addVideoEvents(video, port));
