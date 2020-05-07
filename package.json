@@ -1,7 +1,7 @@
 {
   "name": "video-volume-fix",
   "sideEffects": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chrome extension - videos volume fixer for Facebook",
   "main": "index.js",
   "dependencies": {},
