@@ -1,4 +1,5 @@
 import {
+  ease,
   getVolumeSettings,
   StoredSoundSettings,
 } from './misc';
@@ -21,5 +22,5 @@ export function updateVolumeBadgeText(muted: boolean, volume: number) {
 }
 
 export function refreshVolumeBadge() {
-  getVolumeSettings((s: StoredSoundSettings) => updateVolumeBadgeText(s.muted, s.volume));
+  getVolumeSettings((s: StoredSoundSettings) => updateVolumeBadgeText(s.muted, ease(s.volume)));
 }

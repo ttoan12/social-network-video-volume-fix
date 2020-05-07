@@ -1,6 +1,7 @@
 import { refreshVolumeBadge } from './lib/badge';
 import {
   handleSoundEvent,
+  log,
   soundEventName,
 } from './lib/misc';
 import InstalledDetails = chrome.runtime.InstalledDetails;
@@ -38,7 +39,7 @@ function installScript(details: InstalledDetails) {
           if (lastErr) {
             // console.error('tab: ' + tabs[index].id + ' lastError: ' + JSON.stringify(lastErr));
           } else {
-            console.log('WHO IS IT?');
+            log('reloaded content script for tab: ' + tabs[index].id);
           }
         });
     }
@@ -46,4 +47,5 @@ function installScript(details: InstalledDetails) {
 }
 
 // Add listener to help the content page to detect extension update
-chrome.runtime.onConnect.addListener(port => {});
+chrome.runtime.onConnect.addListener(port => {
+});

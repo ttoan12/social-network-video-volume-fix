@@ -1,34 +1,56 @@
 import {
+  deEase,
+  ease,
   getVolumeSettings,
   keyupCallback,
   log,
-  setVolumeSettings,
+  storeVolumeSettings,
 } from './misc';
 
 /**
- * Start listen to global volume change combination
+ * Callback function for on stored volume value change event
+ * update video settings with new values
  *
  * @param video
  */
-const getStorageListenerCallback = (video: HTMLVideoElement) => (changes: { [key: string]: { newValue?: any; oldValue?: any; } }) => {
-  if (changes['volume']) {
-    video.volume = changes['volume'].newValue;
-  }
+function onStorageUpdateVideo(video: HTMLVideoElement) {
+  return (changes: { [key: string]: { newValue?: any; oldValue?: any; } }) => {
+    if (changes['volume']) {
+      video.volume = ease(changes['volume'].newValue);
+    }
 
-  if (changes['muted']) {
-    video.muted = changes['muted'].newValue;
-  }
-};
+    if (changes['muted']) {
+      video.muted = changes['muted'].newValue;
+    }
+  };
+}
 
 /**
+ * Set video volume level from storage volume settings
+ *
+ * @param video
+ */
+function setVideoVolumeFromStorage(video: HTMLVideoElement) {
+  getVolumeSettings((stored) => {
+    const easedVolume = ease(stored.volume);
+    if (easedVolume !== video.volume) {
+      video.volume = easedVolume;
+      video.muted = stored.muted;
+    }
+  });
+}
+
+/**
+ * Callback function on video pause.
+ * Remove all event listeners bind to the video
  *
  * @param pauseEvent
  */
-function pauseListenerCallback(pauseEvent: Event) {
+function onVideoPauseRemoveListeners(pauseEvent: Event) {
   log('PAUSE');
-  chrome.storage.onChanged.removeListener(getStorageListenerCallback(<HTMLVideoElement>pauseEvent.target));
-  pauseEvent.target.removeEventListener('pause', pauseListenerCallback);
-  pauseEvent.target.removeEventListener('volumechange', volumeChangeCallback);
+  chrome.storage.onChanged.removeListener(onStorageUpdateVideo(<HTMLVideoElement>pauseEvent.target));
+  pauseEvent.target.removeEventListener('pause', onVideoPauseRemoveListeners);
+  pauseEvent.target.removeEventListener('volumechange', onVideoVolumeChangeUpdateStorage);
 }
 
 /**
@@ -46,31 +68,37 @@ export function playCallback(event: Event) {
     parentContainer.addEventListener('keyup', keyupCallback);
   }
 
-  event.target.addEventListener('pause', pauseListenerCallback);
-  chrome.storage.onChanged.addListener(getStorageListenerCallback(video));
-  event.target.addEventListener('volumechange', volumeChangeCallback);
+  event.target.addEventListener('pause', onVideoPauseRemoveListeners);
+  event.target.addEventListener('volumechange', onVideoVolumeChangeUpdateStorage);
 
-  getVolumeSettings((r) => {
-    if (r.volume !== video.volume) {
-      video.volume = r.volume;
-      video.muted = r.muted;
-    }
-  });
+  // Update video volume on storage change
+  chrome.storage.onChanged.addListener(onStorageUpdateVideo(video));
+
+  setVideoVolumeFromStorage(video);
 }
 
-function volumeChangeCallback(event: Event) {
+/**
+ * Callback function to update storage with video volume level
+ *
+ * @param event
+ */
+function onVideoVolumeChangeUpdateStorage(event: Event) {
   log('Volume CHANGE STARTED');
   const video: HTMLVideoElement = <HTMLVideoElement>event.target;
 
   // Update only when changed
   getVolumeSettings((r) => {
-    if (r.volume === video.volume && r.muted === video.muted) {
+
+    const absoluteVolume = deEase(video.volume); // use absolute volume
+
+    if (absoluteVolume === video.volume && r.muted === video.muted) {
+      log('Not Changed', r.volume, absoluteVolume, video.volume, r.muted, video.muted);
       return;
     }
-    setVolumeSettings({
+    storeVolumeSettings({
       ...r,
-      volume: video.volume,
+      volume: absoluteVolume,
       muted: video.muted,
-    }, () => log('Volume CHANGED to', video.volume, video.muted));
+    }, () => log('Volume CHANGED to', absoluteVolume, video.volume, video.muted));
   });
 }

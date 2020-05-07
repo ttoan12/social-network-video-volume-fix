@@ -18,7 +18,21 @@ export function keyupCallback(event: KeyboardEvent) {
 }
 
 export type soundEventName = 'toggle-volume' | 'volume-up' | 'volume-down' | 'volume-set';
-export type StoredSoundSettings = { volume?: number; muted?: boolean };
+export type StoredSoundSettings = {
+  volume?: number; // Absolute volume level in range between [0,1] Actual volume calculated by ease(volume)
+  muted?: boolean;
+};
+
+export function deEase(x: number | string) {
+  if ('string' === typeof x) {
+    x = parseFloat(x);
+  }
+  return parseFloat(Math.sqrt(x).toFixed(2));
+}
+
+export function ease(x: number) {
+  return x * x;
+}
 
 export function handleSoundEvent(event: soundEventName, newVolume: number = 0): void {
   getVolumeSettings((r: StoredSoundSettings) => {
@@ -34,7 +48,7 @@ export function handleSoundEvent(event: soundEventName, newVolume: number = 0): 
       case 'volume-up':
         // Calculate new volume level
         let volume = isNaN(r.volume) ? 1 : r.volume;
-        volume = volume + 0.1 * ('volume-down' === event ? -1 : 1);
+        volume = volume + 0.02 * ('volume-down' === event ? -1 : 1);
         volume = (volume > 1) ? 1 : volume;
         volume = (volume < 0) ? 0 : volume;
         update = {...update, volume: volume, muted: false};
@@ -42,7 +56,7 @@ export function handleSoundEvent(event: soundEventName, newVolume: number = 0): 
 
     // Update when changed
     if (update.volume !== r.volume || update.muted !== r.muted) {
-      setVolumeSettings({...r, ...update}, () => log('Volume UPDATED to', update));
+      storeVolumeSettings({...r, ...update}, () => log('Volume UPDATED to', update));
     }
   });
 }
@@ -99,7 +113,7 @@ export function observeContainer(cnt: HTMLElement, cfg: MutationObserverInit, po
   return () => {
     log('disconnecting container observer');
     observer.disconnect();
-  }
+  };
 }
 
 export function getVolumeSettings(callback: (s: StoredSoundSettings) => void) {
@@ -110,6 +124,6 @@ export function getVolumeSettings(callback: (s: StoredSoundSettings) => void) {
   }));
 }
 
-export function setVolumeSettings(settings: StoredSoundSettings, callback?: () => void) {
+export function storeVolumeSettings(settings: StoredSoundSettings, callback?: () => void) {
   chrome.storage.local.set(settings, callback);
 }

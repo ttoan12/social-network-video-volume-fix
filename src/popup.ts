@@ -1,11 +1,13 @@
 import {
+  deEase,
+  ease,
   getVolumeSettings,
-  setVolumeSettings,
   StoredSoundSettings,
+  storeVolumeSettings,
 } from './lib/misc';
 import Command = chrome.commands.Command;
 
-const volumeElement = <HTMLInputElement>document.getElementById('vol');
+const volumeInput = <HTMLInputElement>document.getElementById('vol');
 const helpButtonElement = <HTMLButtonElement>document.getElementById('help-button');
 const helpArea = document.getElementById('help-area');
 const shortcutTemplate = <HTMLTemplateElement>document.getElementById('shortcut-template');
@@ -63,18 +65,19 @@ document.querySelectorAll('[translate]')
     element.textContent = chrome.i18n.getMessage(element.textContent);
   });
 
-volumeElement.addEventListener('input', (e: Event) => {
-  const value = parseFloat((<HTMLInputElement>e.target).value);
+volumeInput.addEventListener('input', (e: Event) => {
+  const value = deEase((<HTMLInputElement>e.target).value);
 
   getVolumeSettings((s: StoredSoundSettings) => {
     if (value !== s.volume) {
-      setVolumeSettings({volume: value});
+      storeVolumeSettings({volume: value});
     }
   });
 });
 
+// Set initial input value from storage
 getVolumeSettings((s: StoredSoundSettings) => {
-  if (parseInt(volumeElement.value) !== s.volume) {
-    volumeElement.value = isNaN(s.volume) ? '1' : s.volume.toString();
+  if (deEase(volumeInput.value) !== s.volume) {
+    volumeInput.value = ease(s.volume).toString();
   }
 });
