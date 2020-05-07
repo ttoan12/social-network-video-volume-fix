@@ -9,6 +9,7 @@ If you are tired of Facebook video "screamers", want to make sure next video you
 * Force ads to play with the same volume level as the videos.
 * Remove Mute from videos at "Messages" area.
 * Fixes Facebook native volume up/down with simultaneous scroll functionality.
+* Using ease volume change for fine tuning when using keyboard shortcuts.
 * Change volume level with configurable keyboard shortcuts.
   * Alt + Shift + Up = Volume Up
   * Alt + Shift + Down = Volume Down
