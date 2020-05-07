@@ -1,21 +1,36 @@
 const path = require('path');
+const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
 
-module.exports = {
-  entry: './src/index.js',
+module.exports = env => ({
+  entry: {
+    'content': './src/content.ts',
+    'popup': './src/popup.ts',
+    'background': './src/background.ts'
+  },
   module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name]/[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'DEBUG': JSON.stringify(env && env.DEBUG),
+    }),
     new CopyPlugin([
-      { from: './public', to: './' },
+      {from: './public', to: './'},
     ]),
     new ZipPlugin({
       path: '../',
@@ -23,4 +38,4 @@ module.exports = {
     })
   ],
   mode: 'production'
-};
+});

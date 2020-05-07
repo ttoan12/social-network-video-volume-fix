@@ -2,7 +2,7 @@
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
-  "version": "0.2.0",
+  "version": "1.0.1",
   "manifest_version": 2,
   "permissions": [
     "https://www.facebook.com/*",
@@ -14,14 +14,49 @@
     "48": "icons/icon.48.png",
     "128": "icons/icon.128.png"
   },
+  "commands": {
+    "toggle-volume": {
+      "suggested_key": {
+        "default": "Alt+Shift+M",
+        "mac": "Alt+Shift+M"
+      },
+      "description": "__MSG_toggleSound__",
+      "global": false
+    },
+    "volume-up": {
+      "suggested_key": {
+        "default": "Alt+Shift+Up",
+        "mac": "Alt+Shift+Up"
+      },
+      "description": "__MSG_volumeUp__",
+      "global": false
+    },
+    "volume-down": {
+      "suggested_key": {
+        "default": "Alt+Shift+Down",
+        "mac": "Alt+Shift+Down"
+      },
+      "description": "__MSG_volumeDown__",
+      "global": false
+    }
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ],
+    "persistent": false
+  },
   "content_scripts": [
     {
       "js": [
-        "index.js"
+        "content/content.js"
       ],
       "matches": [
         "https://www.facebook.com/*"
       ]
     }
-  ]
+  ],
+  "browser_action": {
+    "default_popup": "popup/popup.html"
+  }
 }

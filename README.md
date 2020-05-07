@@ -1,20 +1,22 @@
-## ![Social Network Video Volume Fixer](public/icons/icon.48.png) Social Network Video Volume Fixer
+## ![Sound and video fixes for Facebook](public/icons/icon.48.png) Sound and video fixes for Facebook
 
-Install from [Chrome Web Store](https://chrome.google.com/webstore/detail/facebook-video-volume-fix/elfninnghghhkopaakchobkbholknbjf).
+Install from [Chrome Web Store](https://chrome.google.com/webstore/detail/bffojpajjfmkcjpdenhfdlpjdbpflpbl).
 
 If you are tired of Facebook video "screamers", want to make sure next video you watch persist previous video volume level - this extension for you.
 
-
 ### What it does
-1. Preserve volume level between videos and sessions.
-2. Force ads to play with the same volume level as the videos.
+* Preserve volume level between videos and sessions.
+* Force ads to play with the same volume level as the videos.
+* Remove Mute from videos at "Messages" area.
+* Fixes Facebook native volume up/down with simultaneous scroll functionality.
+* Using ease volume change for fine tuning when using keyboard shortcuts.
+* Change volume level with configurable keyboard shortcuts.
+  * Alt + Shift + Up = Volume Up
+  * Alt + Shift + Down = Volume Down
+  * Alt + Shift + M = Toggle Mute
 
-### What's good in it 
-* Have access to Facebook pages only.
-* It is open source, feel free to check it here: https://github.com/zagushka/social-network-video-volume-fix
-* No external libraries used. 
-* Minimalistic, only few lines of code.
+### It is open source
+Feel free to check it here: https://github.com/zagushka/social-network-video-volume-fix
 
 ### TODO
-* Remove Mute from videos at "Messages" area.
 * Playing new video should stop playing previous one.

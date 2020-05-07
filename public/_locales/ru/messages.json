@@ -1,8 +1,30 @@
 {
   "appName": {
-    "message": "Social Network Video Volume Fixer"
+    "message": "Фиксы звука и видео в Фейсбук",
+    "description": "The title of the application, displayed in the web store."
   },
   "appDesc": {
-    "message": "Дополненеие позволяющее Facebook 'запоминать' уровень звука в видео. "
+    "message": "Позволяет 'запоминать' уровень звука в видео Фейсбук.",
+    "description": "The description of the application, displayed in the web store."
+  },
+  "volumeUp": {
+    "message": "Громче",
+    "description": "Keyboard shortcut `volume up` name"
+  },
+  "volumeDown": {
+    "message": "Тише",
+    "description": "Keyboard shortcut `volume down` name"
+  },
+  "toggleSound": {
+    "message": "Звук вкл/выкл",
+    "description": "Keyboard shortcut `toggle sound` name"
+  },
+  "customize": {
+    "message": "Настроки",
+    "description": "Customize button name"
+  },
+  "rate_or_leave_a_feedback": {
+    "message": "Оцените или прокомментируйте",
+    "description": "'rate or leave a feedback' button name"
   }
 }
