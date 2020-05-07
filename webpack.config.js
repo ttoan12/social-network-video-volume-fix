@@ -27,7 +27,7 @@ module.exports = env => ({
   },
   plugins: [
     new webpack.DefinePlugin({
-      'DEBUG': JSON.stringify(env.DEBUG),
+      'DEBUG': JSON.stringify(env && env.DEBUG),
     }),
     new CopyPlugin([
       {from: './public', to: './'},
