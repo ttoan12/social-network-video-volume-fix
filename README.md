@@ -1,6 +1,8 @@
+> This is a fork of https://github.com/zagushka/social-network-video-volume-fix
+
 ## ![Sound and video fixes for Facebook and Instagram](public/icons/icon.48.png) Sound and video fixes for Facebook and Instagram
 
-Install from [Chrome Web Store](https://chrome.google.com/webstore/detail/bffojpajjfmkcjpdenhfdlpjdbpflpbl).
+Install from [Chrome Web Store](https://chrome.google.com/webstore/detail/cbgnfjmnollcelnaphjnmflglcigkceo).
 
 If you are tired of Facebook video "screamers", want to make sure next video you watch persist previous video volume level - this extension for you.
 
