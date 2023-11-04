@@ -1,22 +1,22 @@
 {
   "appName": {
-    "message": "Исправления громкости для Фейсбук и инстаграм.",
+    "message": "Điều chỉnh âm lượng cho Facebook và Instagram",
     "description": "The title of the application, displayed in the web store."
   },
   "appDesc": {
-    "message": "Позволяет 'запоминать' уровень звука в видео Фейсбук и инстаграм.",
+    "message": "Tiện ích mở rộng giúp bạn lưu lại âm lượng đặt và tự động điều chỉnh âm lượng cho tất cả video từ Facebook và Instagram",
     "description": "The description of the application, displayed in the web store."
   },
   "volumeUp": {
-    "message": "Громче",
+    "message": "Tăng âm lượng",
     "description": "Keyboard shortcut `volume up` name"
   },
   "volumeDown": {
-    "message": "Тише",
+    "message": "Giảm âm lượng",
     "description": "Keyboard shortcut `volume down` name"
   },
   "toggleSound": {
-    "message": "Звук вкл/выкл",
+    "message": "Bật/tắt âm thanh",
     "description": "Keyboard shortcut `toggle sound` name"
   }
 }

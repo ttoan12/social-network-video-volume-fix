@@ -16,4 +16,4 @@ If you are tired of Facebook video "screamers", want to make sure next video you
   * Alt + Shift + M = Toggle Mute
 
 ### It is open source
-Feel free to check it here: https://github.com/zagushka/social-network-video-volume-fix
+Feel free to check it here: https://github.com/ttoan12/social-network-video-volume-fix

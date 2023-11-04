@@ -9,88 +9,19 @@
         padding: 0;
       }
 
-      .link {
-        box-shadow: inset 0 1px 0 0 #9acc85;
-        background: #74ad5a linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
-        border: 1px solid #3b6e22;
-        /*display: inline-block;*/
-        white-space: nowrap;
-        cursor: pointer;
-        color: #ffffff;
-        font-size: 13px;
-        font-weight: bold;
-        padding: 6px 12px;
-        text-decoration: none;
-      }
-
-      .link:hover {
-        background: #68a54b linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
-      }
-
-      .link:active {
-        position: relative;
-        top: 1px;
-      }
-
       input[type="range"] {
         width: 20px;
         writing-mode: vertical-lr;
         cursor: pointer;
       }
 
-      kbd {
-        background-color: #eee;
-        border-radius: 3px;
-        border: 1px solid #b4b4b4;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
-        color: #333;
-        display: inline-block;
-        font-size: 0.85em;
-        font-weight: 700;
-        line-height: 1;
-        padding: 2px 4px;
-        white-space: nowrap;
-      }
-
       div {
         display: flex;
-      }
-
-      .help-button {
-        text-align: center;
-        display: block;
-        width: 16px;
-        height: 17px;
-        border-radius: 50%;
-        border: 1px solid black;
-        cursor: pointer;
-      }
-
-      .hidden {
-        display: none;
       }
     </style>
   </head>
   <body>
-    <template id="shortcut-template">
-      <div class="shortcut-description"></div>
-      <div>
-        <div class="shortcut-keys"></div>
-      </div>
-    </template>
-
     <div style="display: flex; align-items: stretch">
-      <div id="help-area" class="hidden" style="flex-flow: column; justify-content: space-between">
-        <div id="shortcuts-list" style="flex-flow: column"></div>
-        <div>
-          <a class="link" link="link_shortcuts"><span translate>customize</span></a>
-        </div>
-        <div style="flex-grow: 1">&nbsp;</div>
-        <div>
-          <a class="link" link="link_rate_us"><span translate>rate_or_leave_a_feedback</span></a>
-        </div>
-      </div>
-
       <div style="flex-shrink: 1; flex-direction: column; width: 30px">
         <datalist id="volumes">
           <option>0</option>
@@ -104,7 +35,6 @@
           <option>1</option>
         </datalist>
         <input type="range" min="0" max="1" step="0.01" value="0.67" list="volumes" id="vol" />
-        <span style="align-self: flex-end"><a id="help-button" class="help-button">?</a></span>
       </div>
     </div>
 

@@ -1,0 +1,12 @@
+Nếu bạn khi xem video từ Facebook hoặc Instagram mà âm lượng mặc định quá lớn, nhưng rất phiền khi phải giảm âm lượng của cả hệ thống thì tiện ích mở rộng này sẽ dành cho bạn.
+
+* Điều chỉnh mức âm lượng đã đặt ở mọi video.
+* Tất cả video đều có cùng mức âm lượng, kể cả quảng cáo.
+* Âm lượng tăng một cách mượt mà khi sử dụng phím tắt để điều chỉnh.
+* Có thể sử dụng các phím tắt sau để điều chỉnh âm lượng.
+  * Alt + Shift + Up = Tăng âm lượng
+  * Alt + Shift + Down = Giảm âm lượng
+  * Alt + Shift + M = Bật/tắt âm thanh
+
+Đây là mã nguồn mở
+Bạn có thể xem qua mã nguồn tại đây: https://github.com/ttoan12/social-network-video-volume-fix

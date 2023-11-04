@@ -12,4 +12,4 @@
   * Alt + Shift + M = Звук вкл/выкл
 
 It is open source
-Feel free to check it here: https://github.com/zagushka/social-network-video-volume-fix
+Feel free to check it here: https://github.com/ttoan12/social-network-video-volume-fix
