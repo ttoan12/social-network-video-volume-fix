@@ -5,9 +5,9 @@
     "module": "esnext",
     "target": "es2015",
     "allowJs": true,
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "strict": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "lib": ["es2018", "dom"]
   }
 }

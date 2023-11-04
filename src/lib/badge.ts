@@ -9,7 +9,7 @@ export function formatVolumeForBadge(value: number) {
 }
 
 export function setBadgeText(text: string) {
-  chrome.browserAction.setBadgeText({text});
+  chrome.action.setBadgeText({text});
 }
 
 export function updateVolumeBadgeText(muted: boolean, volume: number) {

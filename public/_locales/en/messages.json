@@ -1,10 +1,10 @@
 {
   "appName": {
-    "message": "Sound and video fixes for Facebook",
+    "message": "Volume fixes for Facebook and Instagram",
     "description": "The title of the application, displayed in the web store."
   },
   "appDesc": {
-    "message": "Extension allows Facebook to 'remember' video volume level.",
+    "message": "Extension allows Facebook and Instagram to 'remember' video volume level.",
     "description": "The description of the application, displayed in the web store."
   },
   "volumeUp": {

@@ -1,10 +1,9 @@
-import { playCallback } from './video';
+import { playCallback } from "./video";
 import Port = chrome.runtime.Port;
 
 export function log(...args: any[]) {
   // @ts-ignore
-  DEBUG
-  && console.log.apply(null, args);
+  DEBUG && console.log.apply(null, args);
 }
 
 /**
@@ -12,19 +11,19 @@ export function log(...args: any[]) {
  * @param event
  */
 export function keyupCallback(event: KeyboardEvent) {
-  if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+  if (["ArrowDown", "ArrowUp"].includes(event.key)) {
     event.preventDefault();
   }
 }
 
-export type soundEventName = 'toggle-volume' | 'volume-up' | 'volume-down' | 'volume-set';
+export type soundEventName = "toggle-volume" | "volume-up" | "volume-down" | "volume-set";
 export type StoredSoundSettings = {
   volume?: number; // Absolute volume level in range between [0,1] Actual volume calculated by ease(volume)
   muted?: boolean;
 };
 
 export function deEase(x: number | string) {
-  if ('string' === typeof x) {
+  if ("string" === typeof x) {
     x = parseFloat(x);
   }
   return parseFloat(Math.sqrt(x).toFixed(2));
@@ -38,25 +37,25 @@ export function handleSoundEvent(event: soundEventName, newVolume: number = 0): 
   getVolumeSettings((r: StoredSoundSettings) => {
     let update = r;
     switch (event) {
-      case 'volume-set':
-        update = {...update, volume: newVolume, muted: false};
+      case "volume-set":
+        update = { ...update, volume: newVolume, muted: false };
         break;
-      case 'toggle-volume': // Toggle muted
-        update = {...update, muted: !r.muted};
+      case "toggle-volume": // Toggle muted
+        update = { ...update, muted: !r.muted };
         break;
-      case 'volume-down':
-      case 'volume-up':
+      case "volume-down":
+      case "volume-up":
         // Calculate new volume level
         let volume = isNaN(r.volume) ? 1 : r.volume;
-        volume = volume + 0.02 * ('volume-down' === event ? -1 : 1);
-        volume = (volume > 1) ? 1 : volume;
-        volume = (volume < 0) ? 0 : volume;
-        update = {...update, volume: volume, muted: false};
+        volume = volume + 0.05 * ("volume-down" === event ? -1 : 1);
+        volume = volume > 1 ? 1 : volume;
+        volume = volume < 0 ? 0 : volume;
+        update = { ...update, volume: volume, muted: false };
     }
 
     // Update when changed
     if (update.volume !== r.volume || update.muted !== r.muted) {
-      storeVolumeSettings({...r, ...update}, () => log('Volume UPDATED to', update));
+      storeVolumeSettings({ ...r, ...update }, () => log("Volume UPDATED to", update));
     }
   });
 }
@@ -68,7 +67,7 @@ export function extractVideosFromNode(node: Node): Array<HTMLVideoElement> {
     return videoElements;
   }
 
-  let videoCollection = (<Element>node).getElementsByTagName('video');
+  let videoCollection = (<Element>node).getElementsByTagName("video");
 
   for (let i = 0; i < videoCollection.length; i++) {
     videoElements.push(videoCollection.item(i));
@@ -77,25 +76,25 @@ export function extractVideosFromNode(node: Node): Array<HTMLVideoElement> {
 }
 
 export function addVideoEvents(video: HTMLVideoElement, port: Port) {
-  log('add events to video', video);
-  video.addEventListener('play', playCallback);
-  port.onDisconnect.addListener(() => video.removeEventListener('play', playCallback));
+  log("add events to video", video);
+  video.addEventListener("play", playCallback);
+  port.onDisconnect.addListener(() => video.removeEventListener("play", playCallback));
 
   // Parent container
-  const parentContainer = video.closest('.mtm');
+  const parentContainer = video.closest(".mtm");
   if (parentContainer) {
-    log('found video parent container', parentContainer, video);
+    log("found video parent container", parentContainer, video);
     // Fix native facebook scroll when changing vol.
-    parentContainer.addEventListener('keyup', keyupCallback);
-    port.onDisconnect.addListener(() => parentContainer.removeEventListener('keyup', keyupCallback));
+    parentContainer.addEventListener("keyup", keyupCallback);
+    port.onDisconnect.addListener(() => parentContainer.removeEventListener("keyup", keyupCallback));
   }
 }
 
 export function observeContainer(cnt: HTMLElement, cfg: MutationObserverInit, port: Port) {
-  log('STARTING NEW CONTAINER OBSERVER');
+  log("STARTING NEW CONTAINER OBSERVER");
   const observer = new MutationObserver((mutationsList, obs) => {
     if (!document.contains(cnt)) {
-      log('LOST CONTAINER');
+      log("LOST CONTAINER");
       // Node was changed, find new one
       obs.disconnect();
       return;
@@ -111,17 +110,19 @@ export function observeContainer(cnt: HTMLElement, cfg: MutationObserverInit, po
   observer.observe(cnt, cfg);
 
   return () => {
-    log('disconnecting container observer');
+    log("disconnecting container observer");
     observer.disconnect();
   };
 }
 
 export function getVolumeSettings(callback: (s: StoredSoundSettings) => void) {
-  chrome.storage.local.get(['volume', 'muted'], (s: StoredSoundSettings) => callback.call(null, {
-    volume: 1,
-    muted: false,
-    ...s,
-  }));
+  chrome.storage.local.get(["volume", "muted"], (s: StoredSoundSettings) =>
+    callback.call(null, {
+      volume: 1,
+      muted: false,
+      ...s,
+    })
+  );
 }
 
 export function storeVolumeSettings(settings: StoredSoundSettings, callback?: () => void) {
